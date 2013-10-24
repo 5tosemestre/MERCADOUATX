@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      >
+    <h:head>
+        <title>REGISTRO</title>
+<script type="text/javascript">
+function validar(e) { // 1
+    tecla = (document.all) ? e.keyCode : e.which; // 2
+    if (tecla==8) return true; // 3
+    patron = /[QWERTYUIOPASDFGHJKLÑZXCVBNM.qwertyuiopasdfghjklñzxcvbnm]/; // No acepta números // 4
+    te = String.fromCharCode(tecla); // 5
+    return patron.test(te); // 6
+} 
+</script>
+    </h:head>
+    <h:body>
+    	<h:form>
+    	
+     <p:panel header="DATOS PERSONALES">  
+        <h:panelGrid columns="2" cellpadding="5">  
+             
+            
+   
+<h:outputText value="NOMBRE USUARIO: " /> 
+          <p:inputMask  id="USUARIO"  value="#{Controlador.dato.nomusuario}" mask=""   required="true"  requiredMessage="INGRESE EL NOMBRE DE USUARIO" />  
+          
+        
+              <h:outputText value="CONTRASEÑA" />  
+            <p:password id="CONTRASEÑA" value="#{Controlador.dato.pw}"    
+                        promptLabel="INGRESA TU CONTRASEÑA" weakLabel="Debil"  
+                        goodLabel="Buena" strongLabel="Exelente"    required="true"   requiredMessage="INGRESE LA CONTRASEÑA" /> 
+            
+                       
+            
+            
+              <h:outputText value="NOMBRE COMPLETO: " />  
+            <p:inputMask id="NOMBRE"  value="#{Controlador.dato.nombre}" onkeypress="return validar(event)" mask=""  required="true"   requiredMessage="INGRESE EL NOMBRE" />  
+            
+ 
+              
+            <p:commandButton style="font-size:10px"  value="REGRESAR ATRAS" action="\index.xhtml" process="@this" />
+            <p:commandButton style="font-size:10px"  update="msj,@form,carsTable" value="GUARDAR" action="#{Controlador.guardar}"  />	 
+            
+
+    		<p:growl id="msj" life="1000" />
+    		
+    		
+
+    		
+    		 
+        </h:panelGrid>  
+
+
+<p:dataTable   var="registro" value="#{Controlador.listausuario}"  id="carsTable" style="font-size:12px">  
+  
+        <p:ajax event="rowSelect"  oncomplete="carDialog.show()" />  
+  
+  
+         <p:column > 
+         <f:facet name="header">  
+         <h:outputText value="ID USUARIO" /> 
+         </f:facet>  
+         <h:outputText value="#{registro.id}" />
+         </p:column> 
+  
+  
+  
+        
+        <p:column headerText="USUARIO" sortBy="#{registro.nombre}" filterBy="#{registro.nombre}" id="model" > 
+         <f:facet name="header">  
+         <h:outputText value="USUARIO" /> 
+            #{registro.nombre} 
+         </f:facet>  
+         <h:outputText value="#{registro.nombre}" />
+         </p:column> 
+         
+         
+
+
+   
+ </p:dataTable> 
+				
+
+ 
+    </p:panel>  
+      
+  
+        		
+    	
+    		
+    		   
+                          
+    	</h:form>
+    
+    </h:body>
+</html>

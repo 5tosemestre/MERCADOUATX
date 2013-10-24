@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      >
+    <h:head>
+        <title>LOGUEO</title>
+            <script type="text/javascript">
+function validar(e) { // 1
+    tecla = (document.all) ? e.keyCode : e.which; // 2
+    if (tecla==8) return true; // 3
+    patron = /\D/; // No acepta números // 4
+    te = String.fromCharCode(tecla); // 5
+    return patron.test(te); // 6
+} 
+</script>
+    </h:head>
+    <h:body >
+    	<body >
+
+    	<h:form>
+   
+    	            <p:panel header="ACCEDER A CUENTA" >  
+        <h:panelGrid columns="2" cellpadding="5">  
+        
+     
+        
+    	<p:outputLabel value="USUARIO ID" style="color:red"/> 
+    	<p:inputText value="#{LoginControlador.id}"  />  
+    	
+    	
+    	
+    	<h:outputLabel for="pwd1" value="CONTRASEÑA:" style="color:red"/>  
+            <p:password id="pwd1" value="#{LoginControlador.pwd}" required="true"/>    	
+    	
+    	
+    
+    			 
+    	       <br/>
+    	       <br/>
+    	<p:commandButton style="font-size:10px"  value="ENTRAR"  action="#{LoginControlador.ingresar}"  update="msj" />
+    	
+    	
+    	<p:growl id="msj" life="1000" />
+    	
+    		
+    		        
+  
+        </h:panelGrid>  
+        <p:commandButton style="font-size:10px"  value="REGRESAR ATRAS" action="\index.xhtml" process="@this" />
+    </p:panel> 
+    		
+    		
+    		   
+                          
+    	</h:form>
+   
+    </body>
+    </h:body>
+</html>

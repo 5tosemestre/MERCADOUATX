@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" 
+      >
+    <h:head>
+        <title>MENU</title>
+    </h:head>
+    <h:body  >
+    	<h:form>
+    	
+	<h:outputLabel value="Bienvenido "></h:outputLabel>
+	<br />
+		
+		<h:outputLabel value="No. ID"></h:outputLabel><h:outputLabel value="#{LoginControlador.obtenerValorSesion('id')}"></h:outputLabel>
+		<br />
+		
+		<p:commandButton style="font-size:10px" value="CERRAR SESIÓN "
+			action="#{LoginControlador.cerrarSesion}" update="msj" />
+		<p:growl id="msj" life="1000" />
+
+    		
+    		
+
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    <p:dock columns="15" cellpadding="15">  
+<!--     <p:menuitem value="INGRESO DE ROPA" icon="C:\Users\Sony\workspace\SAd`T\WebContent\IMAGENES\Home.png" url="ingresoropa.xhtml"/>   -->
+<!--     <p:menuitem value="RETIRO DE ROPA" icon="C:\Users\Sony\workspace\SAd`T\WebContent\IMAGENES\Home.png" url="#"/>   -->
+    <p:menuitem value="BUSQUEDA"  icon="C:\Users\Sony\workspace\SAd`T\WebContent\IMAGENES\Home.png" url="busqueda.xhtml"/>  
+    <p:menuitem value="FACTURACIÓN"  icon="C:\Users\Sony\workspace\SAd`T\WebContent\IMAGENES\Home.png" url="registrocliente.xhtml"/> 
+     <p:menuitem value="REPORTES"  icon="C:\Users\Sony\workspace\SAd`T\WebContent\IMAGENES\Home.png" url="reportes.xhtml"/> 
+     <p:menuitem value="REGISTAR PRENDAS"  icon="C:\Users\Sony\workspace\SAd`T\WebContent\IMAGENES\Home.png" url="registroropa.xhtml"/> 
+<!--              <p:menuitem value="RETIRO DE DINERO" icon="C:\Users\Sony\workspace\SAd`T\WebContent\IMAGENES\Home.png" url="#" />   -->
+    </p:dock>  
+    </h:form>
+    
+    </h:body>
+</html>

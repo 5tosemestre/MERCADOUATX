@@ -64,35 +64,33 @@
 			return patron.test(te);
 		}
 	</script>
-
 	<h:form>
 
 		<p:panel header="DATOS PERSONALES">
+		<img src="logo/logo.png" alt="Logo" />
 			<h:panelGrid columns="2" cellpadding="5">
-<h:outputText value="Nombre Competo: " />
+<h:outputText value="Nombre Completo: " />
 				<p:inputText value="#{Controlador.usuario.nombre}"
-					 converter="#{Number}" onkeypress="return soloLetras(event)" required="true" mask="" >
+					 onkeypress="return soloLetras(event)" required="true" mask="" >
 					 <f:validateLength maximum="50"/>
-					 </p:inputText>
+					</p:inputText>
 				<h:outputText value="Nombre Usuario: " />
 				<p:inputText value="#{Controlador.usuario.nomUser}"
-					 converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" mask="" >
+				converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" mask="" >
 					 <f:validateLength minimum="3"/>
 					 <f:validateLength maximum="10"/>
-					 </p:inputText>
+					</p:inputText>
 				<h:outputText value="Contraseña " />
 				<p:password id="CONTRASEÑA" value="#{Controlador.usuario.password}"
 					promptLabel="Ingresa tu Contraseña" weakLabel="Debil"
-					goodLabel="Buena" strongLabel="Exelente"  converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" >
+					goodLabel="Buena" strongLabel="Exelente" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" >
 					 <f:validateLength minimum="6"/>
 					 <f:validateLength maximum="10"/>
 					</p:password>
 				
-					<p:commandButton style="font-size:10px" update="msj,@form"
+				<p:commandButton style="font-size:10px" update="msj,@form"
 					value="GUARDAR" action="#{Controlador.guardar()}" />
-					
-							
-				<p:commandButton style="font-size:10px" value="REGRESAR ATRAS"
+				<p:commandButton style="font-size:10px" value="REGRESAR ATRÁS"
 					action="\index.xhtml" process="@this" />
 				<p:growl id="msj" life="1000" />
 			</h:panelGrid>

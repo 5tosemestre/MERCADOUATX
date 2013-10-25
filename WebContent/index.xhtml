@@ -68,27 +68,30 @@
 
 	<body>
 		<h:form>
-  
-		<p:commandButton value="Logueate" icon="ui-icon-script" onclick="dlg.show()" />
+           <img src="logo/logo.png" alt="Logo" />
+           <br/>
+		<p:commandButton value="Iniciar sesión" icon="ui-icon-script" onclick="dlg.show()" />
 		
-		<p:commandButton value="Registrate"  icon="ui-icon-script"
+		<p:commandButton value="Registro"  icon="ui-icon-script"
 					action="\registro.xhtml" process="@this" />
 		
 		<p:growl id="growl" showDetail="true" life="3000" />  
-        <p:dialog id="dialog" header="Login" widgetVar="dlg" resizable="false" modal="true" >  
+        <p:dialog id="dialog" header="Iniciar sesión" widgetVar="dlg" resizable="false" modal="true" >  
     
     <h:panelGrid columns="2" cellpadding="5">  
          	<p:outputLabel value="USUARIO" style="color:red"/> 
-    	     <p:inputText value="#{LoginControlador.nom}" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" />  
+    	     <p:inputText value="#{LoginControlador.nom}" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" >
+    	     </p:inputText>  
     	
     	
     	
     	    <h:outputLabel for="pwd2" value="CONTRASEÑA:" style="color:red"/>  
-            <p:password id="pwd2" value="#{LoginControlador.pwd}" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true"/>    	
+            <p:password id="pwd2" value="#{LoginControlador.pwd}" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true">
+            </p:password>    	
     	
-    	<p:commandButton style="font-size:10px"  value="ENTRAR"  action="#{LoginControlador.login}"  update="msj" />
+    	<p:commandButton style="font-size:10px"  value="ENTRAR"  action="#{LoginControlador.login}"  />
     	
-    	 	<p:growl id="msj" life="1000" />
+    	 
                      
 	</h:panelGrid>  
           

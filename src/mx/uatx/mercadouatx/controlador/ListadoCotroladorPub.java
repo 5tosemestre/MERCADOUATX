@@ -30,7 +30,10 @@ public class ListadoCotroladorPub {
 		CapturaPublicADO captura = new CapturaPublicADO();
 		
 		listar= captura.listarpublica();
-					
+		
+	
+		
+		
 	}
 	
 	public String obtenerValorSesion(String clave){
@@ -47,7 +50,6 @@ public class ListadoCotroladorPub {
 	public List<PublicacionTO> getListar() {
 		return listar;
 	}
-	
 	public void setListar(List<PublicacionTO> listar) {
 		this.listar = listar;
 	}

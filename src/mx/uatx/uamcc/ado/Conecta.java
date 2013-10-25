@@ -1,5 +1,5 @@
 
-package mx.uatx.uamcc.sadt;
+package mx.uatx.uamcc.ado;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

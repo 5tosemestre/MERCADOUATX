@@ -5,9 +5,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title>LOGUEO</title>
-	<script type="text/javascript">
+
+	<h:head>
+        <title>PÁGINA PRINCIPAL</title>
+  	<script type="text/javascript">
 		function validar(e) { // 1
 			tecla = (document.all) ? e.keyCode : e.which; // 2
 			if (tecla == 8)
@@ -17,8 +18,9 @@
 			return patron.test(te); // 6
 		}
 	</script>
-</h:head>
-<h:body><script type="text/javascript">
+
+    </h:head>
+    <h:body><script type="text/javascript">
 		function soloLetras(e) {
 			tecla = (document.all) ? e.keyCode : e.which;
 			if (tecla == 8)
@@ -63,20 +65,76 @@
 			return patron.test(te);
 		}
 	</script>
+       <h:form id="formgeneral" prependId="false">  
+ <img src="logo/logo.png" alt="Logo" />
+<p:tabMenu activeIndex="0">  
 
-
-
-	<body>
-		<h:form>
-           <img src="logo/logo.png" alt="Logo" />
-           <br/>
-		<p:commandButton value="Iniciar sesión" icon="ui-icon-script" onclick="dlg.show()" />
+         
+    
+    <p:menuitem value="Iniciar sesión" icon="ui-icon-script" onclick="dlg.show()"  /> 
+   <p:menuitem value="Registro" url="registro.xhtml"/>
+   <p:menuitem value="Cerrar Sesión"  icon="ui-icon-person" action="#{LoginControlador.cerrarSesion}" style="font-size:12px" rendered="#{LoginControlador.tieneRol('nombre')}"/>
+    
+</p:tabMenu> 
+  <br></br>
+<p:selectOneMenu 
+  id="cat"
+		 value="#{controlador.categoria.id}">
+		 
+		 
+	 
+		 
+		 
+		 
+		 
 		
-		<p:commandButton value="Registro"  icon="ui-icon-script"
-					action="\registro.xhtml" process="@this" />
+		 
+    <f:selectItems 
+    value="#{controlador.listacategorias}" 
+    var="file" 
+    itemLabel="#{file.descripcion}"  
+    itemValue="#{file.id}"/>
+    <br></br>
+  </p:selectOneMenu>
+    <p:commandButton  action ="#{controlador.buscarxcate}" value="BUSCAR" update="formgeneral"/> 
+    
+    
+    <p:dataTable  var="ta" value="#{controlador.listar}" id="tb" 
+    emptyMessage ="No hay resultados">
+            
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="NOMBRE" />  
+            </f:facet>  
+            <h:outputText value="#{ta.ttulo}" />  
+        </p:column>  
+  
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="DESC. CORTA" />  
+            </f:facet>  
+            <h:outputText value="#{ta.desCorta}" />  
+        </p:column>  
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="IMAGEN" />  
+            </f:facet>  
+            <h:outputText value="#{ta.imagen}" />  
+        </p:column>  
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="CATEGORIA" />  
+            </f:facet>  
+            <h:outputText value="#{ta.descat}" />  
+       </p:column>  
+    </p:dataTable>
+
 		
-		<p:growl id="growl" showDetail="true" life="3000" />  
-        <p:dialog id="dialog" header="Iniciar sesión" widgetVar="dlg" resizable="false" modal="true" >  
+        </h:form>
+        <h:form id="dialog">
+        
+    <p:growl id="growl" showDetail="true" life="3000" />  
+        <p:dialog id="dialog" header="Iniciar sesión" widgetVar="dlg" resizable="false"  >  
     
     <h:panelGrid columns="2" cellpadding="5">  
          	<p:outputLabel value="USUARIO" style="color:red"/> 
@@ -95,11 +153,9 @@
                      
 	</h:panelGrid>  
           
-    </p:dialog>  
-    </h:form> 
-
-			
-
-	</body>
-</h:body>
+    </p:dialog> 
+        
+        
+        </h:form>
+    </h:body>
 </html>

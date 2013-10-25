@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import mx.uatx.mercadouatx.ado.CapturaSAdT;
+import mx.uatx.mercadouatx.ado.CapturaADO;
 import mx.uatx.mercadouatx.beans.DatosTO;
 
 
@@ -124,7 +124,7 @@ public class LoginControlador {
 		} catch (Exception ex) {
 
 		}
-		CapturaSAdT c = new CapturaSAdT();
+		CapturaADO c = new CapturaADO();
 		String resultado = c.validarIngreso(nom, pwd);
 		String lista[] = resultado.split("@");
 		if (lista[0].equals("1")) {
@@ -142,13 +142,13 @@ public class LoginControlador {
 		} else {
 
 			mostrarMensaje(lista[1]);
-			redireccionar("logueo.xhtml");
+			redireccionar("index.xhtml");
 			return;
 		}
 	}
 	
 	public void cargarIdUsuario(String nom, String pwd) {
-		CapturaSAdT c = new CapturaSAdT();
+		CapturaADO c = new CapturaADO();
 		List<DatosTO> listado = c.obtenerId(nom,pwd);
 		
 			subirValorSesion("id",listado.get(0).getId()+"");

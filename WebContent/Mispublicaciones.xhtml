@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+        <title>PUBLICACIONES</title>
+        <script type="text/javascript">
+		
+		function num(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\d/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+		</script>
+		
+        <script type="text/javascript">
+		function soloLetras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /[A-Za-zñÑ\s]/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+		</script>
+		
+			<script type="text/javascript">
+function negativos(e) { // 1
+    tecla = (document.all) ? e.keyCode : e.which; // 2
+    if (tecla==8) return true; // 3
+    patron = /[1234567890]/;  // No acepta números // 4
+    te = String.fromCharCode(tecla); // 5
+    return patron.test(te); // 6
+} </script>
+
+    </h:head>
+    <h:body>
+       <h:form prependId="false">  
+
+            
+            
+            
+<p:tabMenu activeIndex="0">  
+ 
+		 
+			
+    <p:menuitem value="NUEVA PUBLICACIÓN" url="/ui/tabMenuDemos.jsf" icon="ui-icon-document" />  
+    <p:menuitem value="PUBLICACIONES" url="/ui/tabMenuDocumentation.jsf" icon="ui-icon-search"/>  
+    <p:menuitem value="PÁGINA PRINCIPAL" url="/ui/tabMenuSupport.jsf" icon="ui-icon-home"/>  
+    <p:menuitem value="CERRAR SESIÓN"  icon="ui-icon-person"  action="#{LoginControlador.cerrarSesion}"  update="msj" />
+    <p:growl id="msj" life="1000" />  
+    	
+</p:tabMenu> 
+
+
+   <p:outputLabel value="TU ID ES:  #{LoginControlador.obtenerValorSesion('id')}"></p:outputLabel>
+
+    <p:dataTable var="dato" value="#{ListadoControladorPub.listar}" id="tb"
+            emptyMessage="No hay registros..." > 
+          
+             
+            
+        <f:facet name="header">
+        
+            MIS PUBLICACIONES 
+        </f:facet> 
+        <br/>
+        
+       
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="NOMBRE" />  
+            </f:facet>  
+            <h:outputText value="#{dato.titulo}" />  
+        </p:column>  
+  
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="IMAGEN" />  
+            </f:facet>  
+            <h:outputText value="#{dato.ima}" />  
+        </p:column>  
+  
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="CATEGORIA" />  
+            </f:facet>  
+            <h:outputText value="#{dato.descat}" />  
+        </p:column>  
+  
+        <p:column>  
+            <f:facet name="header">  
+                <h:outputText value="ESTATUS" />  
+            </f:facet>  
+            <h:outputText value="#{dato.desesta}" />  
+       </p:column>  
+    </p:dataTable>  
+  
+ 
+ 
+
+              
+        </h:form>
+    </h:body>
+</html>

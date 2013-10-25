@@ -18,42 +18,85 @@
 		}
 	</script>
 </h:head>
-<h:body>
+<h:body><script type="text/javascript">
+		function soloLetras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /[A-Za-zñÑ\s]/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script><script type="text/javascript">
+		function soloLetras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /[A-Za-zñÑ\s]/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+		function soloNumeros(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\d/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script>
+
+
+
 	<body>
 		<h:form>
-			<p:dialog header="Iniciar Sesión" widgetVar="dlg" modal="true"
-				showEffect="clip" hideEffect="clip">
-				<h:panelGrid columns="2">
-					<h:outputLabel styleClass="etiquetas" value="Usuario: " />
-					<p:inputText id="inputName" required="true"
-						requiredMessage="Ingresa un nombre de usuario" value="#{LoginControlador.nom}">
-						<f:validateLength minimum="3" />
-						<f:validateLength maximum="10" />
-					</p:inputText>
-					<h:outputLabel styleClass="etiquetas" value="Contraseña: " />
-					<p:password id="inputPass" required="true"
-						requiredMessage="Ingresa una contraseña" value="#{LoginControlador.pwd}">
-						<f:validateLength minimum="3" />
-						<f:validateLength maximum="10" />
-					</p:password>
-					<f:facet name="footer">  
-					<p:commandButton value="Iniciar" type="button" action="#{LoginControlador.login}" update="msj" />
-				<p:commandButton value="Cancelar" type="button" onclick="dlg.hide()" />
-					 </f:facet>  
-				</h:panelGrid>
-			</p:dialog>
-			<p:panel header="INDEX">
-				<h:panelGrid columns="2" cellpadding="5">
-					<p:commandButton value="Registrate" icon="ui-icon-script"
-						action="\registro.xhtml" process="@this" />
-					<p:commandButton value="Logueate" icon="ui-icon-script"
-						onclick="dlg.show()"/>
-					<p:commandButton value="Cerrar Sesión" icon="ui-icon-script"
-						action="#{LoginControlador.cerrarSesion}" process="@this" />
-					<p:growl id="msj" life="1000" />
-				</h:panelGrid>
-			</p:panel>
-		</h:form>
+  
+		<p:commandButton value="Logueate" icon="ui-icon-script" onclick="dlg.show()" />
+		
+		<p:commandButton value="Registrate"  icon="ui-icon-script"
+					action="\registro.xhtml" process="@this" />
+		
+		<p:growl id="growl" showDetail="true" life="3000" />  
+        <p:dialog id="dialog" header="Login" widgetVar="dlg" resizable="false" modal="true" >  
+    
+    <h:panelGrid columns="2" cellpadding="5">  
+         	<p:outputLabel value="USUARIO" style="color:red"/> 
+    	     <p:inputText value="#{LoginControlador.nom}" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" />  
+    	
+    	
+    	
+    	    <h:outputLabel for="pwd2" value="CONTRASEÑA:" style="color:red"/>  
+            <p:password id="pwd2" value="#{LoginControlador.pwd}" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true"/>    	
+    	
+    	<p:commandButton style="font-size:10px"  value="ENTRAR"  action="#{LoginControlador.login}"  update="msj" />
+    	
+    	 	<p:growl id="msj" life="1000" />
+                     
+	</h:panelGrid>  
+          
+    </p:dialog>  
+    </h:form> 
+
+			
+
 	</body>
 </h:body>
 </html>

@@ -140,7 +140,7 @@ public class LoginControlador {
 		} else {
 
 			mostrarMensaje(lista[1]);
-			redireccionar("logueo.xhtml");
+			redireccionar("index.xhtml");
 			return;
 		}
 	}

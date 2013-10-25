@@ -19,25 +19,79 @@
 	</script>
 </h:head>
 <h:body>
+ <script type="text/javascript">
+		function soloLetras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /[A-Za-zñÑ\s]/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script><script type="text/javascript">
+		function soloLetras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /[A-Za-zñÑ\s]/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+		function soloNumeros(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\d/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script>
+
 	<h:form>
 
 		<p:panel header="DATOS PERSONALES">
 			<h:panelGrid columns="2" cellpadding="5">
-
+<h:outputText value="Nombre Competo: " />
+				<p:inputText value="#{Controlador.usuario.nombre}"
+					 converter="#{Number}" onkeypress="return soloLetras(event)" required="true" mask="" >
+					 <f:validateLength maximum="50"/>
+					 </p:inputText>
 				<h:outputText value="Nombre Usuario: " />
-				<p:inputMask value="#{Controlador.usuario.nomUser}"
-					onkeypress="return validar(event)" mask="" />
+				<p:inputText value="#{Controlador.usuario.nomUser}"
+					 converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" mask="" >
+					 <f:validateLength minimum="3"/>
+					 <f:validateLength maximum="10"/>
+					 </p:inputText>
 				<h:outputText value="Contraseña " />
 				<p:password id="CONTRASEÑA" value="#{Controlador.usuario.password}"
 					promptLabel="Ingresa tu Contraseña" weakLabel="Debil"
-					goodLabel="Buena" strongLabel="Exelente" />
-				<h:outputText value="Nombre: " />
-				<p:inputMask value="#{Controlador.usuario.nombre}"
-					onkeypress="return validar(event)" mask="" />
-				<p:commandButton style="font-size:10px" value="CANCELAR"
-					action="\logueo.xhtml" process="@this" />
-				<p:commandButton style="font-size:10px" update="msj,@form"
+					goodLabel="Buena" strongLabel="Exelente"  converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" >
+					 <f:validateLength minimum="6"/>
+					 <f:validateLength maximum="10"/>
+					</p:password>
+				
+					<p:commandButton style="font-size:10px" update="msj,@form"
 					value="GUARDAR" action="#{Controlador.guardar()}" />
+					
+							
 				<p:commandButton style="font-size:10px" value="REGRESAR ATRAS"
 					action="\index.xhtml" process="@this" />
 				<p:growl id="msj" life="1000" />

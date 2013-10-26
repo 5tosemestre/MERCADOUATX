@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>REGISTRO</title>
+	<script type="text/javascript">
+		function validar(e) { // 1
+			tecla = (document.all) ? e.keyCode : e.which; // 2
+			if (tecla == 8)
+				return true; // 3
+			patron = /\D/; // No acepta números // 4
+			te = String.fromCharCode(tecla); // 5
+			return patron.test(te); // 6
+		}
+	</script>
+</h:head>
+<h:body>
+ <script type="text/javascript">
+		function soloLetras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /[A-Za-zñÑ\s]/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script><script type="text/javascript">
+		function soloLetras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /[A-Za-zñÑ\s]/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+		function soloNumeros(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\d/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+	</script>
+	<h:form>
+
+		<p:panel header="VENTAS">
+		<img src="logo/logo.png" alt="Logo" />
+			<h:panelGrid columns="2" cellpadding="5">
+			<center>
+<h:outputText value="TÍTULO: " />
+
+<br></br>
+	</center>	<center>
+				<p:inputText  value="#{Controladorventa.oferta.titulo}"
+					 onkeypress="return soloLetras(event)" required="true" mask="" >
+					 <f:validateLength maximum="50"/>
+					</p:inputText>
+					<br></br>
+						</center>
+							<center>
+				<h:outputText value="DESCRIPCIÓN CORTA " />
+					<br></br>
+						</center>
+							<center>
+				<p:inputText   value="#{Controladorventa.oferta.descripcionCort}"
+				converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" mask="" >
+					 <f:validateLength minimum="3"/>
+					 <f:validateLength maximum="10"/>
+					</p:inputText>
+						</center>
+						<br></br>
+							<center>
+				<h:outputText value="DESCRIPCIÓN LARGA " />
+					<br></br>
+						</center>
+							<center>
+				<p:inputTextarea id="CONTRASEÑA"  value="#{Controladorventa.oferta.descripcionLarg}"
+					promptLabel="Ingresala descripción" weakLabel="Debil"
+					goodLabel="Buena" strongLabel="Exelente" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" >
+					
+					</p:inputTextarea>
+						</center>
+					<br></br>
+						<center>
+				<p:commandButton style="font-size:10px" update="msj,@form"
+					value="GUARDAR" action="#{Controlador.guardar()}" />
+						</center>
+				<p:commandButton style="font-size:10px" value="REGRESAR ATRÁS"
+					action="\index.xhtml" process="@this" />
+				<p:growl id="msj" life="1000" />
+				
+			</h:panelGrid>
+			
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

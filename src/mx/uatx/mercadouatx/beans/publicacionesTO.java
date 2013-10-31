@@ -7,18 +7,21 @@ public class publicacionesTO {
 	public void setTtulo(String ttulo) {
 		this.ttulo = ttulo;
 	}
+	private Integer idp;
 	private String ttulo;
 	private String imagen;
 	private Integer idcat;
 	private String descat;
 	private Integer idesta;
 	private String desCorta;
-	private String DesEsta;
+	private String desEsta;
+	private String desLar;
+	private String tt;
+	private Integer precio;
 	public Integer getIdp() {
 		return idp;
 	}
-	private Integer idp;
-	private String tt;
+	
 	public String getTt() {
 		return tt;
 	}
@@ -60,11 +63,23 @@ public class publicacionesTO {
 	public void setDesCorta(String desCorta) {
 		this.desCorta = desCorta;
 	}
+	public String getDesLar() {
+		return desLar;
+	}
+	public void setDesLar(String desLar) {
+		this.desLar = desLar;
+	}
+	public Integer getPrecio() {
+		return precio;
+	}
+	public void setPrecio(Integer precio) {
+		this.precio = precio;
+	}
 	public String getDesEsta() {
-		return DesEsta;
+		return desEsta;
 	}
 	public void setDesEsta(String desEsta) {
-		DesEsta = desEsta;
+		this.desEsta = desEsta;
 	}
 
 }

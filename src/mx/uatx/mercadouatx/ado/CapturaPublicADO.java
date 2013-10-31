@@ -5,17 +5,19 @@ package mx.uatx.mercadouatx.ado;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.context.FacesContext;
 
-
+import mx.uatx.mercadouatx.beans.DatosTO;
+import mx.uatx.mercadouatx.beans.OfertaTO;
 import mx.uatx.mercadouatx.beans.PublicacionTO;
+import mx.uatx.mercadouatx.beans.publicacionesTO;
 import oracle.jdbc.OracleTypes;
 
 public class CapturaPublicADO {
-	
 	
 				
 	public List<PublicacionTO> listarpublica(){
@@ -36,11 +38,14 @@ public class CapturaPublicADO {
 		while(res.next()){
 			PublicacionTO ms=new PublicacionTO();
 
-			ms.setDesesta(res.getString(7));
-			ms.setIdesta(res.getInt(6));
-			ms.setDescat(res.getString(5));
-			ms.setIdcat(res.getInt(4));
-			ms.setIma(res.getString(3));
+			ms.setDesesta(res.getString(10));
+			ms.setIdesta(res.getInt(9));
+			ms.setDescat(res.getString(8));
+			ms.setIdcat(res.getInt(7));
+			ms.setIma3(res.getString(6));
+			ms.setIma2(res.getString(5));
+			ms.setIma(res.getString(4));
+			ms.setDesCort(res.getString(3));
 			ms.setTitulo(res.getString(2));
 			ms.setIdp(res.getInt(1));
 		
@@ -56,6 +61,73 @@ public class CapturaPublicADO {
 		}
 		return listado;
 		}
+	
+	
+	
+	public List<OfertaTO> listarOfertas(){
+		 String idu = obtenerValorSesion("id");
+		List<OfertaTO> listado = new ArrayList<OfertaTO>();
+		try{
+		try {
+		Conexion conecta = new Conexion();
+		Connection connection = conecta.getConexion();
+		
+		String sql = "{ call MERCADOUATX.PAMERCADOUATX.SPMOSTRAR_OFERTAS(?,?)} ";
+		CallableStatement callableStatement = connection.prepareCall(sql);
+		callableStatement.setString(1,idu);
+		callableStatement.registerOutParameter(2, OracleTypes.CURSOR);
+		callableStatement.execute();
+		ResultSet res = (ResultSet) callableStatement.getObject(2);
+	
+		while(res.next()){
+			OfertaTO ms=new OfertaTO();
+			ms.setEstatus(res.getString(5));
+			ms.setPtitulo(res.getString(4));
+			ms.setUser(res.getString(3));
+			ms.setIdpubli(res.getInt(2));
+			ms.setIdOf(res.getInt(1));
+		listado.add(ms);
+		}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+		}
+		}catch(Exception ex){
+		System.out.println("Erro en.."+ex.getMessage());
+		}
+		return listado;
+		}
+	public String guardarOfer(publicacionesTO to){
+		 String idu = obtenerValorSesion("id");
+		try{
+			try {
+				Conexion conecta = new Conexion();
+				Connection connection = conecta.getConexion();
+				
+				String sql = "{ ? = call MERCADOUATX.PAMERCADOUATX.FNINSERTAR_OFERTA(?,?)} ";
+				CallableStatement callableStatement = connection.prepareCall(sql);
+				callableStatement.registerOutParameter(1, Types.INTEGER);
+				callableStatement.setString(2, idu);
+				callableStatement.setInt(3, to.getIdp());
+				callableStatement.execute();
+				
+				Integer num = callableStatement.getInt(1);
+				if(num==1){
+					return "Has realizado";
+				}else{
+					return "Erro al guardar verifica tus datos";
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}catch(Exception ex){
+			System.out.println("Erro en.."+ex.getMessage());
+		}
+		return "";
+		
+	}
+	
+		
 	
 	public String obtenerValorSesion(String clave) {
 		try {

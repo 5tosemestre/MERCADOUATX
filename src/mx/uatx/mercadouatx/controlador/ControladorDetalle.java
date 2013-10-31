@@ -11,6 +11,8 @@ import mx.uatx.mercadouatx.ado.capturaPublicGralADO;
 import mx.uatx.mercadouatx.beans.publicacionesTO;
 @ManagedBean(name="ControladorDetalle")
 @SessionScoped
+
+
 public class ControladorDetalle {
 
 private List<publicacionesTO> listarD;

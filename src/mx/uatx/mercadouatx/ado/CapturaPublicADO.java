@@ -103,6 +103,8 @@ public class CapturaPublicADO {
 			try {
 				Conexion conecta = new Conexion();
 				Connection connection = conecta.getConexion();
+
+				
 				
 				String sql = "{ ? = call MERCADOUATX.PAMERCADOUATX.FNINSERTAR_OFERTA(?,?)} ";
 				CallableStatement callableStatement = connection.prepareCall(sql);

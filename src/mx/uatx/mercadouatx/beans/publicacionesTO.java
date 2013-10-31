@@ -7,6 +7,7 @@ public class publicacionesTO {
 	public void setTtulo(String ttulo) {
 		this.ttulo = ttulo;
 	}
+	
 	private Integer idp;
 	private String ttulo;
 	private String imagen;

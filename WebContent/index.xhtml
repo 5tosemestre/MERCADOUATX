@@ -6,9 +6,9 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<h:head>
-        <title>PÁGINA PRINCIPAL</title>
-  	<script type="text/javascript">
+<h:head>
+	<title>PÁGINA PRINCIPAL</title>
+	<script type="text/javascript">
 		function validar(e) { // 1
 			tecla = (document.all) ? e.keyCode : e.which; // 2
 			if (tecla == 8)
@@ -17,10 +17,7 @@
 			te = String.fromCharCode(tecla); // 5
 			return patron.test(te); // 6
 		}
-	</script>
 
-    </h:head>
-    <h:body><script type="text/javascript">
 		function soloLetras(e) {
 			tecla = (document.all) ? e.keyCode : e.which;
 			if (tecla == 8)
@@ -38,15 +35,7 @@
 			te = String.fromCharCode(tecla);
 			return patron.test(te);
 		}
-	</script><script type="text/javascript">
-		function soloLetras(e) {
-			tecla = (document.all) ? e.keyCode : e.which;
-			if (tecla == 8)
-				return true;
-			patron = /[A-Za-zñÑ\s]/;
-			te = String.fromCharCode(tecla);
-			return patron.test(te);
-		}
+
 		function soloNumeros(e) {
 			tecla = (document.all) ? e.keyCode : e.which;
 			if (tecla == 8)
@@ -55,107 +44,112 @@
 			te = String.fromCharCode(tecla);
 			return patron.test(te);
 		}
-
-		function numerosYletras(e) {
-			tecla = (document.all) ? e.keyCode : e.which;
-			if (tecla == 8)
-				return true;
-			patron = /\w/;
-			te = String.fromCharCode(tecla);
-			return patron.test(te);
-		}
 	</script>
-       <h:form id="formgeneral" prependId="false">  
- <img src="logo/logo.png" alt="Logo" />
-<p:tabMenu activeIndex="0">  
 
-         
-    
-    <p:menuitem value="Iniciar sesión" icon="ui-icon-script" onclick="dlg.show()"  /> 
-   <p:menuitem value="Registro" url="registro.xhtml"/>
-   <p:menuitem value="Cerrar Sesión"  icon="ui-icon-person" action="#{LoginControlador.cerrarSesion}" style="font-size:12px" rendered="#{LoginControlador.tieneRol('nombre')}"/>
-    
-</p:tabMenu> 
-  <br></br>
-<p:selectOneMenu 
-  id="cat"
-		 value="#{controlador.categoria.id}">
-		 
-		 
-	 
-		 
-		 
-		 
-		 
-		
-		 
-    <f:selectItems 
-    value="#{controlador.listacategorias}" 
-    var="file" 
-    itemLabel="#{file.descripcion}"  
-    itemValue="#{file.id}"/>
-    <br></br>
-  </p:selectOneMenu>
-    <p:commandButton  action ="#{controlador.buscarxcate}" value="BUSCAR" update="formgeneral"/> 
-    
-    
-    <p:dataTable  var="ta" value="#{controlador.listar}" id="tb" 
-    emptyMessage ="No hay resultados">
-            
-        <p:column>  
-            <f:facet name="header">  
-                <h:outputText value="NOMBRE" />  
-            </f:facet>  
-            <h:outputText value="#{ta.ttulo}" />  
-        </p:column>  
-  
-        <p:column>  
-            <f:facet name="header">  
-                <h:outputText value="DESC. CORTA" />  
-            </f:facet>  
-            <h:outputText value="#{ta.desCorta}" />  
-        </p:column>  
-        <p:column>  
-            <f:facet name="header">  
-                <h:outputText value="IMAGEN" />  
-            </f:facet>  
-            <h:outputText value="#{ta.imagen}" />  
-        </p:column>  
-        <p:column>  
-            <f:facet name="header">  
-                <h:outputText value="CATEGORIA" />  
-            </f:facet>  
-            <h:outputText value="#{ta.descat}" />  
-       </p:column>  
-    </p:dataTable>
+</h:head>
+<h:body>
 
-		
-        </h:form>
-        <h:form id="dialog">
-        
-    <p:growl id="growl" showDetail="true" life="3000" />  
-        <p:dialog id="dialog" header="Iniciar sesión" widgetVar="dlg" resizable="false"  >  
-    
-    <h:panelGrid columns="2" cellpadding="5">  
-         	<p:outputLabel value="USUARIO" style="color:red"/> 
-    	     <p:inputText value="#{LoginControlador.nom}" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" >
-    	     </p:inputText>  
-    	
-    	
-    	
-    	    <h:outputLabel for="pwd2" value="CONTRASEÑA:" style="color:red"/>  
-            <p:password id="pwd2" value="#{LoginControlador.pwd}" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true">
-            </p:password>    	
-    	
-    	<p:commandButton style="font-size:10px"  value="ENTRAR"  action="#{LoginControlador.login}"  />
-    	
-    	 
-                     
-	</h:panelGrid>  
-          
-    </p:dialog> 
-        
-        
-        </h:form>
-    </h:body>
+	<h:form id="formgeneral" prependId="false">
+		<img src="logo/logo.png" alt="Logo" />
+		<p:tabMenu activeIndex="0">
+
+
+
+			<p:menuitem value="Iniciar sesión" icon="ui-icon-script"
+				onclick="dlg.show()" style="font-size:12px" />
+			<p:menuitem value="Registro" url="registro.xhtml"
+				style="font-size:12px" />
+			<p:menuitem value="Cerrar Sesión" icon="ui-icon-person"
+				action="#{LoginControlador.cerrarSesion}" style="font-size:12px"
+				rendered="#{LoginControlador.tieneRol('nombre')}" />
+		</p:tabMenu>
+		<br></br>
+		<table>
+			<tr>
+				<td><p:selectOneMenu id="cat"
+						value="#{controlador.categoria.id}">
+
+
+						<f:selectItems value="#{controlador.listacategorias}" var="file"
+							itemLabel="#{file.descripcion}" itemValue="#{file.id}" />
+						<br></br>
+					</p:selectOneMenu></td>
+				<td><p:commandButton action="#{controlador.buscarxcate}"
+						value="Buscar" update="formgeneral" style="font-size:12px" /></td>
+			</tr>
+		</table>
+		<br />
+		<p:dataTable var="ta" value="#{controlador.listar}" id="tb"
+			emptyMessage="No hay resultados">
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Nombre" />
+				</f:facet>
+				<h:outputText value="#{ta.ttulo}" />
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Desc. Corta" />
+				</f:facet>
+				<h:outputText value="#{ta.desCorta}" />
+			</p:column>
+			<p:column style="width:80%;text-aling:center">
+				<f:facet name="header">
+	
+				
+					<h:outputText value="Imagen" />
+				
+				</f:facet>
+				
+							
+ <center><img src="#{ta.imagen}" title="image1" width="225" height="225" alt="image1 desc" /></center>	
+	
+ 
+
+				
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Categoría" />
+				</f:facet>
+				<h:outputText value="#{ta.descat}" />
+			</p:column>
+		</p:dataTable>
+
+
+	</h:form>
+	<h:form id="dialog">
+
+		<p:growl id="growl" showDetail="true" life="3000" />
+		<p:dialog id="dialog" header="Iniciar sesión" widgetVar="dlg"
+			resizable="false">
+
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel value="Usuario:" style="color:red" />
+				<p:inputText value="#{LoginControlador.nom}" converter="#{Number}"
+					onkeypress="return numerosYletras(event)" required="true">
+				</p:inputText>
+
+
+
+				<h:outputLabel for="pwd2" value="Contraseña:" style="color:red" />
+				<p:password id="pwd2" value="#{LoginControlador.pwd}"
+					converter="#{Number}" onkeypress="return numerosYletras(event)"
+					required="true">
+				</p:password>
+
+				<p:commandButton style="font-size:12px" value="Entrar"
+					action="#{LoginControlador.login}" />
+
+
+
+			</h:panelGrid>
+
+		</p:dialog>
+
+
+	</h:form>
+</h:body>
 </html>

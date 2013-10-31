@@ -6,7 +6,7 @@ public class OfertasTO {
 	private Integer idesta;
 	private String desesta;
 	private Integer idusu;
-	public Integer getIdp() {
+	public Integer getIdp(  ) {
 		return idp;
 	}
 	public void setIdp(Integer idp) {

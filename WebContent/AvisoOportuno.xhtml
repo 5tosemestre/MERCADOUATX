@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>AVISO OPORTUNO</title>
+</h:head>
+<body>
+	<h:form id="myform" enctype="multipart/form-data">
+	
+		<img src="logo/logo.png" alt="Logo" />
+		
+		<p:tabMenu activeIndex="0">
+
+			<p:menuitem value="Página Principal" url="index.xhtml"
+				icon="ui-icon-home" style="font-size:12px" />
+			
+			<p:menuitem value="Mis Publicaciones" url="Mispublicaciones.xhtml"
+				icon="ui-icon-search" style="font-size:12px" />
+			
+			
+			
+			
+			<p:growl id="msj" life="1000" />
+
+		</p:tabMenu>
+
+
+	
+	
+	
+	
+		<p:growl id="messages" life="2000" showDetail="true" />
+<br/>
+<p:panelGrid columns="2" style="width:100%">
+<f:facet name="header">AVISO OPORTUNO</f:facet>
+		<h:outputText value="Título" />
+		<p:inputText id="titulo" style="width:250px" maxlength="40"
+			required="true" requiredMessage="Ingresa un título">
+			<f:validateRequired for="titulo"></f:validateRequired>
+		</p:inputText>
+		
+		<h:outputText value="Descripción Corta" />
+		<p:inputText id="DescCorta" style="width:250px" maxlength="40"
+			required="true" requiredMessage="Ingresa una descripción">
+			<f:validateRequired for="DescCorta"></f:validateRequired>
+		</p:inputText>
+		
+		<h:outputText value="Descripción Larga" />
+		<p:inputTextarea id="DescLarga" style="width:250px" maxlength="100"
+			required="true" requiredMessage="Ingresa una descripción">
+			<f:validateRequired for="DescLarga"></f:validateRequired>
+		</p:inputTextarea>
+	
+		<h:outputText value="Ingresa fecha vencimiento" />
+		
+
+		
+		
+		<p:inputMask id="precio" style="width:250px" maxlength="40" mask="99/99/9999"
+			required="true" requiredMessage="Ingresa un precio">
+			<f:validateRequired for="precio"></f:validateRequired>
+		</p:inputMask>
+		
+		<p:fileUpload value="#{fileuploadcontroller3.image}" mode="simple"
+			update="messages" sizeLimit="900000000"
+			allowTypes="/(\.|\/)(gif|jpe?g|png|txt)$/" required="true"
+			requiredMessage="Ingresa una imagen" />
+					</p:panelGrid>
+		<p:commandButton value="Guardar" ajax="false"
+			actionListener="#{fileuploadcontroller3.uploadAttachment}" style="font-size:12px"/>
+			<p:commandButton style="font-size:12px" value="Regresar Atrás"
+					action="\Mispublicaciones.xhtml" process="@this" />
+	</h:form>
+</body>
+</html>

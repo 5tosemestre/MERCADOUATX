@@ -6,115 +6,72 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>REGISTRO</title>
-	<script type="text/javascript">
-		function validar(e) { // 1
-			tecla = (document.all) ? e.keyCode : e.which; // 2
-			if (tecla == 8)
-				return true; // 3
-			patron = /\D/; // No acepta números // 4
-			te = String.fromCharCode(tecla); // 5
-			return patron.test(te); // 6
-		}
-	</script>
+	<title>Nueva Venta</title>
 </h:head>
-<h:body>
- <script type="text/javascript">
-		function soloLetras(e) {
-			tecla = (document.all) ? e.keyCode : e.which;
-			if (tecla == 8)
-				return true;
-			patron = /[A-Za-zñÑ\s]/;
-			te = String.fromCharCode(tecla);
-			return patron.test(te);
-		}
-
-		function numerosYletras(e) {
-			tecla = (document.all) ? e.keyCode : e.which;
-			if (tecla == 8)
-				return true;
-			patron = /\w/;
-			te = String.fromCharCode(tecla);
-			return patron.test(te);
-		}
-	</script><script type="text/javascript">
-		function soloLetras(e) {
-			tecla = (document.all) ? e.keyCode : e.which;
-			if (tecla == 8)
-				return true;
-			patron = /[A-Za-zñÑ\s]/;
-			te = String.fromCharCode(tecla);
-			return patron.test(te);
-		}
-		function soloNumeros(e) {
-			tecla = (document.all) ? e.keyCode : e.which;
-			if (tecla == 8)
-				return true;
-			patron = /\d/;
-			te = String.fromCharCode(tecla);
-			return patron.test(te);
-		}
-
-		function numerosYletras(e) {
-			tecla = (document.all) ? e.keyCode : e.which;
-			if (tecla == 8)
-				return true;
-			patron = /\w/;
-			te = String.fromCharCode(tecla);
-			return patron.test(te);
-		}
-	</script>
-	<h:form>
-
-		<p:panel header="VENTAS">
+<body>
+	<h:form id="myform" enctype="multipart/form-data">
+	
+	
 		<img src="logo/logo.png" alt="Logo" />
-			<h:panelGrid columns="2" cellpadding="5">
-			<center>
-<h:outputText value="TÍTULO: " />
+		
+		<p:tabMenu activeIndex="0">
 
-<br></br>
-	</center>	<center>
-				<p:inputText  value="#{Controladorventa.oferta.titulo}"
-					 onkeypress="return soloLetras(event)" required="true" mask="" >
-					 <f:validateLength maximum="50"/>
-					</p:inputText>
-					<br></br>
-						</center>
-							<center>
-				<h:outputText value="DESCRIPCIÓN CORTA " />
-					<br></br>
-						</center>
-							<center>
-				<p:inputText   value="#{Controladorventa.oferta.descripcionCort}"
-				converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" mask="" >
-					 <f:validateLength minimum="3"/>
-					 <f:validateLength maximum="10"/>
-					</p:inputText>
-						</center>
-						<br></br>
-							<center>
-				<h:outputText value="DESCRIPCIÓN LARGA " />
-					<br></br>
-						</center>
-							<center>
-				<p:inputTextarea id="CONTRASEÑA"  value="#{Controladorventa.oferta.descripcionLarg}"
-					promptLabel="Ingresala descripción" weakLabel="Debil"
-					goodLabel="Buena" strongLabel="Exelente" converter="#{Number}" onkeypress="return numerosYletras(event)" required="true" >
-					
-					</p:inputTextarea>
-						</center>
-					<br></br>
-						<center>
-				<p:commandButton style="font-size:10px" update="msj,@form"
-					value="GUARDAR" action="#{Controlador.guardar()}" />
-						</center>
-				<p:commandButton style="font-size:10px" value="REGRESAR ATRÁS"
-					action="\index.xhtml" process="@this" />
-				<p:growl id="msj" life="1000" />
-				
-			</h:panelGrid>
+			<p:menuitem value="Página Principal" url="index.xhtml"
+				icon="ui-icon-home" style="font-size:12px" />
 			
-		</p:panel>
+			<p:menuitem value="Mis Publicaciones" url="Mispublicaciones.xhtml"
+				icon="ui-icon-search" style="font-size:12px" />
+			
+			<p:menuitem value="Nueva Publicación" url="comentariosLogue.xhtml"
+				icon="ui-icon-document" style="font-size:12px" />
+			
+		
+			<p:growl id="msj" life="1000" />
+
+		</p:tabMenu>
+
+
+	
+			<p:growl id="messages" life="2000" showDetail="true" />
+			<br />
+<p:panelGrid columns="2" style="width:100%">
+<f:facet name="header">Nueva Venta</f:facet>
+		<h:outputText value="Título" />
+		<p:inputText id="titulo" style="width:250px" maxlength="40"
+			required="true" requiredMessage="Ingresa un titulo">
+			<f:validateRequired for="titulo"></f:validateRequired>
+		</p:inputText>
+		
+		<h:outputText value="Descripción Corta" />
+		<p:inputText id="DescCorta" style="width:250px" maxlength="40"
+			required="true" requiredMessage="Ingresa una descripción">
+			<f:validateRequired for="DescCorta"></f:validateRequired>
+		</p:inputText>
+
+		<h:outputText value="Descripción Larga" />
+		<p:inputTextarea  cols="100" rows="10" id="DescLarga" style="width:250px" maxlength="100"
+			required="true" requiredMessage="Ingresa una descripción">
+			<f:validateRequired for="DescLarga"></f:validateRequired>
+		</p:inputTextarea>
+		
+		<h:outputText value="Precio" />
+		<p:inputText id="precio" style="width:250px" maxlength="40"
+			required="true" requiredMessage="Ingresa un precio">
+			<f:validateRequired for="precio"></f:validateRequired>
+		</p:inputText>
+		
+		<p:fileUpload value="#{fileuploadcontroller.image}" mode="simple"
+			update="messages" sizeLimit="900000000"
+			allowTypes="/(\.|\/)(gif|jpe?g|png|txt)$/" required="true"
+			requiredMessage="Ingresa una imagen" /> 
+		
+		</p:panelGrid>
+		<p:commandButton value="Guardar" ajax="false"
+			actionListener="#{fileuploadcontroller.uploadAttachment}" style="font-size:12px" />
+			
+			<p:commandButton style="font-size:12px" value="Regresar Atrás"
+					action="\Mispublicaciones.xhtml" process="@this" />
+					
 	</h:form>
-</h:body>
+</body>
 </html>

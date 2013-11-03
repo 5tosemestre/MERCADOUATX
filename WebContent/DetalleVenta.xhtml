@@ -1,13 +1,10 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-
-
-
 
 <h:head>
 	<title>DETALLE DE PUBLICACION</title>
@@ -28,9 +25,9 @@
 				icon="ui-icon-search" style="font-size:12px" />
 			<p:menuitem value="Nueva Publicación" url="/ui/tabMenuSupport.jsf"
 				icon="ui-icon-document" style="font-size:12px" />
-			<p:menuitem value="Cerrar Sesión" icon="ui-icon-person"
-				action="#{LoginControlador.cerrarSesion}" style="font-size:12px"
-				update="msj" />
+<!-- 			<p:menuitem value="Cerrar Sesión" icon="ui-icon-person" -->
+<!-- 				action="#{LoginControlador.cerrarSesion}" style="font-size:12px" -->
+<!-- 				update="msj" /> -->
 			<p:growl id="msj" life="1000" />
 
 		</p:tabMenu>
@@ -72,7 +69,7 @@
 				<f:facet name="header">
 					<h:outputText value="Imágen" />
 				</f:facet>
-				<h:outputText value="#{dato3.imagen}" />
+				<center><img src="#{dato3.imagen}" title="image1" width="225" height="225" alt="image1 desc" /></center>
 			</p:column>
 
 			<p:column>
@@ -93,7 +90,44 @@
 			</p:column>
 		</p:dataTable>
 
+	<p:dataTable var="ta"
+			value="#{ControladorDetalle.lista_comentarios}" id="tb"
+			emptyMessage="No hay resultados">
 
+			<f:facet name="header"> Comentarios  </f:facet>
+			<p:column>
+				<h:outputText value="#{ta.nombre} el dia " />
+				<h:outputText value="#{ta.fecha} dijo: " />
+				<br />
+				<h:outputText value="#{ta.comen} " />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+
+		<p:panelGrid columns="2">
+		
+			<f:facet name="header">Comentar</f:facet>
+			
+
+			
+					
+					
+					
+			
+			<h:outputText value="Nick" />
+			<p:outputLabel value="ANÓNIMO"  onkeypress="return numerosYletras(event)"/>
+			
+			
+			<h:outputText value=" Mensaje: " />
+			<h:inputTextarea cols="100" rows="10" name="comentar" value="#{ControladorDetalle.ofert.comen}" />
+
+		</p:panelGrid>
+
+		<p:commandButton value="Guardar" update="msj,@form"
+			action="#{ControladorDetalle.guardar}" style="font-size:12px" />
+
+		
 
 	
 	</h:form>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Comentarios</title>
+
+<script type="text/javascript">
+		
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		
+	</script>
+
+</h:head>
+<h:body>
+
+	<h:form>
+
+		<img src="logo/logo.png" alt="Logo" />
+		<p:tabMenu activeIndex="0">
+
+			<p:menuitem value="Página Principal" url="index2.xhtml"
+				icon="ui-icon-home" style="font-size:12px" />
+
+			<p:menuitem value="Mis Publicaciones" url="Mispublicaciones.xhtml"
+				icon="ui-icon-search" style="font-size:12px" />
+
+			<p:menuitem value="Nueva Publicación" url="comentariosLogue.xhtml"
+				icon="ui-icon-document" style="font-size:12px" />
+
+			<p:menuitem value="Cerrar Sesión" icon="ui-icon-person"
+				action="#{LoginControlador.cerrarSesion}" style="font-size:12px"
+				update="msj" />
+		</p:tabMenu>
+
+		<br />
+		<p:dataTable var="dato3" value="#{ControladorDetalle2.resultado}"
+			id="tb3" emptyMessage="No hay registros...">
+
+			<f:facet name="header">
+        
+           Publicacion Detallada
+        </f:facet>
+        <p:growl id="msj2" life="1000" />
+			<br />
+
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Titulo" />
+				</f:facet>
+				<h:outputText value="#{dato3.ttulo}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Descripcion" />
+				</f:facet>
+				<h:outputText value="#{dato3.desLar}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Precio" />
+				</f:facet>
+				<h:outputText value="#{dato3.precio}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Imágen" />
+				</f:facet>
+				<center><img src="#{dato3.imagen}" title="image1" width="225" height="225" alt="image1 desc" /></center>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Estatus" />
+				</f:facet>
+				<h:outputText value="#{dato3.desEsta}" />
+			</p:column>
+			<p:column>
+				<p:commandButton id="bt"
+					action="#{ListadoControladorNew.guardar}" value="OFERTAR"
+					update="@form,msj2" process="@this">
+<f:setPropertyActionListener
+						target="#{ListadoControladorNew.newofer}" value="#{dato3}" />
+
+				</p:commandButton>
+
+			</p:column>
+		</p:dataTable>
+		<p:dataTable var="re"
+			value="#{ListadoControladorComen.lista_comentarios}" id="tb"
+			emptyMessage="No hay registros...">
+
+			<f:facet name="header"> Comentarios  </f:facet>
+			<p:column>
+				<h:outputText value="#{re.nombre} el dia " />
+				<h:outputText value="#{re.fecha} dijo" />
+				<br />
+				<h:outputText value="#{re.comen}  " />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+			<p:panelGrid columns="2">
+		
+			<f:facet name="header">Comentar</f:facet>
+			
+
+			<h:outputText value="Usuario:" />
+			<p:outputLabel value="#{LoginControlador.obtenerValorSesion('nombre')}"></p:outputLabel>
+			
+			<h:outputText value=" Mensaje: " />
+			<h:inputTextarea cols="100" rows="10" name="comentar" value="#{ControladorDetalle2.ofert.comen}" />
+
+		</p:panelGrid>
+
+		<p:commandButton value="Guardar" update="msj,@form"
+			action="#{ControladorDetalle2.guardarLogue}" style="font-size:12px" />
+
+		<p:growl id="msj" life="1000" />
+
+
+	</h:form>
+</h:body>
+</html>

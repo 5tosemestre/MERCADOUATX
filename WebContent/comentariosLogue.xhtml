@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Comentarios</title>
+
+<script type="text/javascript">
+		
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		
+	</script>
+
+</h:head>
+<h:body>
+
+	<h:form>
+
+		<img src="logo/logo.png" alt="Logo" />
+		<p:tabMenu activeIndex="0">
+
+			<p:menuitem value="Página Principal" url="index.xhtml"
+				icon="ui-icon-home" style="font-size:12px" />
+
+			<p:menuitem value="Mis Publicaciones" url="Mispublicaciones.xhtml"
+				icon="ui-icon-search" style="font-size:12px" />
+
+			<p:menuitem value="Nueva Publicación" url="comentariosLogue.xhtml"
+				icon="ui-icon-document" style="font-size:12px" />
+
+			<p:menuitem value="Cerrar Sesión" icon="ui-icon-person"
+				action="#{LoginControlador.cerrarSesion}" style="font-size:12px"
+				update="msj" />
+		</p:tabMenu>
+
+		<br />
+		<p:dataTable var="re"
+			value="#{ListadoControladorComen.lista_comentarios}" id="tb"
+			emptyMessage="No hay registros...">
+
+			<f:facet name="header"> Comentarios  </f:facet>
+			<p:column>
+				<h:outputText value="#{re.nombre} el dia " />
+				<h:outputText value="#{re.fecha} dijo" />
+				<br />
+				<h:outputText value="#{re.comen}  " />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+			<p:panelGrid columns="2">
+		
+			<f:facet name="header">Comentar</f:facet>
+			
+			<h:outputText value="Id Public: " />
+			<p:inputText id="publi" value="#{ListadoControladorComen.comen.idpubli}" />
+
+			<h:outputText value="Usuario:" />
+			<p:outputLabel value="#{LoginControlador.obtenerValorSesion('nombre')}"></p:outputLabel>
+			
+			<h:outputText value=" Mensaje: " />
+			<h:inputTextarea cols="100" rows="10" name="comentar" value="#{ListadoControladorComen.comen.comen}" />
+
+		</p:panelGrid>
+
+		<p:commandButton value="Guardar" update="msj,@form"
+			action="#{ListadoControladorComen.guardarLogue}" style="font-size:12px" />
+
+		<p:growl id="msj" life="1000" />
+
+
+	</h:form>
+</h:body>
+</html>

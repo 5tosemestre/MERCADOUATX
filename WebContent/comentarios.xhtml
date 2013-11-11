@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<script type="text/javascript">
+		
+		function numerosYletras(e) {
+			tecla = (document.all) ? e.keyCode : e.which;
+			if (tecla == 8)
+				return true;
+			patron = /\w/;
+			te = String.fromCharCode(tecla);
+			return patron.test(te);
+		}
+
+		
+	</script>
+
+
+	<title>Comentarios</title>
+</h:head>
+<h:body>
+
+	<h:form>
+
+		<img src="logo/logo.png" alt="Logo" />
+
+		<p:tabMenu activeIndex="0">
+
+			<p:menuitem value="Página Principal" url="index.xhtml"
+				icon="ui-icon-home" style="font-size:12px" />
+		</p:tabMenu>
+		<br />
+
+		<p:dataTable var="ta"
+			value="#{ListadoControladorComen.lista_comentarios}" id="tb"
+			emptyMessage="No hay resultados">
+
+			<f:facet name="header"> Comentarios  </f:facet>
+			<p:column>
+				<h:outputText value="#{ta.nombre} el dia " />
+				<h:outputText value="#{ta.fecha} dijo: " />
+				<br />
+				<h:outputText value="#{ta.comen} " />
+			</p:column>
+
+		</p:dataTable>
+		<br />
+
+		<p:panelGrid columns="2">
+		
+			<f:facet name="header">Comentar</f:facet>
+			
+			<h:outputText value="Id Public: " />
+			<p:inputText id="publi" value="#{ListadoControladorComen.comentario.idpubli}" />
+
+			<h:outputText value="Nick" />
+			<p:inputText value="#{ListadoControladorComen.comentario.nombre}"  onkeypress="return numerosYletras(event)"/>
+
+			<h:outputText value=" Mensaje: " />
+			<h:inputTextarea cols="100" rows="10" name="comentar" value="#{ListadoControladorComen.comentario.comen}" />
+
+		</p:panelGrid>
+
+		<p:commandButton value="Guardar" update="msj,@form"
+			action="#{ListadoControladorComen.guardar}" style="font-size:12px" />
+
+		<p:growl id="msj" life="1000" />
+
+	</h:form>
+
+</h:body>
+
+</html>

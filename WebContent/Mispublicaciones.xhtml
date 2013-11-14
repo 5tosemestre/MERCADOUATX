@@ -18,12 +18,13 @@
 		<p:toolbar>
 			<p:toolbarGroup align="left">
 
-				<p:commandButton style="font-size:12px" value="Página Principal"
-					icon="ui-icon-document" action="\index.xhtml" />
-				<p:commandButton style="font-size:12px" value="Mis Publicaciones"
-					icon="ui-icon-document" action="Mispublicaciones.xhtml" />
+				<p:commandButton style="font-size:12px" value="PÃ¡gina Principal"
+					icon="ui-icon-document" action="\index2.xhtml" />
+				
+				<p:commandButton style="font-size:12px" value="Mis Ofertas"
+					icon="ui-icon-document" action="MisOfertas.xhtml" />
 				<p:separator />
-				<p:commandButton value="Cerrar Sesión" icon="ui-icon-person"
+				<p:commandButton value="Cerrar SesiÃ³n" icon="ui-icon-person"
 					action="#{LoginControlador.cerrarSesion}" style="font-size:12px"
 					rendered="#{LoginControlador.tieneRol('nombre')}" />
 			</p:toolbarGroup>
@@ -43,9 +44,10 @@
 		</p:toolbar>
 
 		<p:growl id="msj" life="1000" />
-
-		<p:outputLabel
-			value="Bienvenido:  #{LoginControlador.obtenerValorSesion('nombre')}"></p:outputLabel>
+<!-- <font color="red">Bienvenido</font> -->
+<!-- 		<p:outputLabel   -->
+<!-- 			value="  #{LoginControlador.obtenerValorSesion('nombre')}"></p:outputLabel> -->
+		<br/>
 		<p:dataTable var="dato" value="#{ListadoControladorPub.listar}"
 			id="tb" emptyMessage="No hay registros...">
 
@@ -57,22 +59,23 @@
 				<f:facet name="header">
 					<h:outputText value="Nombre" />
 				</f:facet>
-				<h:outputText value="#{dato.titulo}" />
+				<h:outputText value="#{dato.ttulo}" />
 			</p:column>
+			<br/>
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="Imágen" />
+					<h:outputText value="ImÃ¡gen" />
 				</f:facet>
 
 				
 
-  <center><img src="#{dato.ima}" title="image1" width="225" height="225" alt="image1 desc" /></center>	
+  <center><img src="#{dato.imagen}" title="image1" width="225" height="225" alt="image1 desc" /></center>	
 
   
 			</p:column>
 			<p:column>
 				<f:facet name="header">
-					<h:outputText value="Categoría" />
+					<h:outputText value="CategorÃ­a" />
 				</f:facet>
 				<h:outputText value="#{dato.descat}" />
 			</p:column>
@@ -80,8 +83,50 @@
 				<f:facet name="header">
 					<h:outputText value="Estatus" />
 				</f:facet>
-				<h:outputText value="#{dato.desesta}" />
+				<h:outputText value="#{dato.desEsta}" />
 			</p:column>
+			<p:column>
+				<p:commandButton id="bt" action="#{ControladorDetalle2.obtenidp}" 
+					value="Ver Mas..." update="@form" process="@this"> 
+					<f:setPropertyActionListener
+						target="#{ControladorDetalle2.ofert}" value="#{dato}" /></p:commandButton> 
+							</p:column>
+		</p:dataTable>
+		<p:dataTable var="dato1" value="#{ListadoControladorPub.listar2}"
+			id="td" emptyMessage="No hay registros...">
+			<f:facet name="header">
+            Mis Ofertas
+        </f:facet>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Usuario" />
+				</f:facet>
+				<h:outputText value="#{dato1.user}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Publicacion" />
+				</f:facet>
+				<h:outputText value="#{dato1.ptitulo}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Estatus" />
+				</f:facet>
+				<h:outputText value="#{dato1.estatus}" />
+			</p:column>
+
+			<p:column>
+				<p:commandButton id="bt"
+					action="#{ListadoControladorPub.actualizarOfe}" value="Aceptar"
+					update="@form" process="@this">
+<f:setPropertyActionListener
+						target="#{ListadoControladorPub.oferta}" value="#{dato1}" />
+
+				</p:commandButton>
+
+			</p:column>
+
 		</p:dataTable>
 	</h:form>
 </h:body>

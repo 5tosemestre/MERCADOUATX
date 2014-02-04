@@ -1,7 +1,5 @@
 package mx.uatx.mercadouatx.beans;
-
 public class categoriaTO {
-
 	private Integer id;
 	private String descripcion;
 	public Integer getId() {
@@ -16,6 +14,4 @@ public class categoriaTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
 }
